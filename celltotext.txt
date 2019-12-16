@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+ namespace WindowsFormsApplication1
+{
+    public partial class DataGridView_Row_Data_To_TextBoxes : Form
+    {
+        public DataGridView_Row_Data_To_TextBoxes()
+        {
+            InitializeComponent();
+        }
+
+         DataTable table = new DataTable();
+
+         private void DataGridView_Row_Data_To_TextBoxes_Load(object sender, EventArgs e)
+        {
+            // set datatable columns values
+            table.Columns.Add("Id", typeof(int));// data type int
+            table.Columns.Add("First Name", typeof(string));// data type string
+            table.Columns.Add("Last Name", typeof(string));// data type int
+            table.Columns.Add("Age", typeof(int));// data type string
+
+             table.Rows.Add(1, "First A", "Last A", 10);
+            table.Rows.Add(2, "First B", "Last B", 20);
+            table.Rows.Add(3, "First C", "Last C", 30);
+            table.Rows.Add(4, "First D", "Last D", 40);
+            table.Rows.Add(5, "First E", "Last E", 50);
+            table.Rows.Add(6, "First F", "Last F", 60);
+            table.Rows.Add(7, "First G", "Last G", 70);
+            table.Rows.Add(8, "First H", "Last H", 80);
+
+             dataGridView1.DataSource = table;
+
+         }
+
+         //Get Selected Row Values From DataGridView Into TextBox
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;// get the Row Index
+            DataGridViewRow selectedRow = dataGridView1.Rows[index];
+            textBoxID.Text = selectedRow.Cells[0].Value.ToString();
+            textBoxFN.Text = selectedRow.Cells[1].Value.ToString();
+            textBoxLN.Text = selectedRow.Cells[2].Value.ToString();
+            textBoxAGE.Text = selectedRow.Cells[3].Value.ToString();
+
+         }
+    }
+}

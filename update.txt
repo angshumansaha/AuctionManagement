@@ -1,0 +1,102 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.ComponentModel;
+
+using System.Data;
+
+using System.Drawing;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.Windows.Forms;
+
+using MySql.Data.MySqlClient;
+
+
+
+
+namespace Csharp_And_MySQL
+
+{
+
+    public partial class Csharp_MySQL_Update : Form
+
+    {
+
+
+
+
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+
+
+
+        public Csharp_MySQL_Update()
+
+        {
+
+            InitializeComponent();
+
+        }
+
+
+
+
+        private void BTN_UPDATE_Click(object sender, EventArgs e)
+
+        {
+
+          
+
+            string updateQuery = "UPDATE test_db.users SET fname = '"+textBoxFName.Text+"', lname = '"+textBoxLName.Text+"', age = "+int.Parse(textBoxAge.Text)+" WHERE id="+int.Parse(textBoxID.Text);
+
+
+
+
+            connection.Open();
+
+            try
+
+            {
+
+                MySqlCommand command = new MySqlCommand(updateQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+
+                {
+
+                    MessageBox.Show("DATA UPDATED");
+
+                }
+
+                else
+
+                {
+
+                    MessageBox.Show("Data NOT UPDATED");
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.Message);
+
+            }
+
+            connection.Close();
+
+        }
+
+    }
+
+}
